@@ -4,6 +4,7 @@ using SE.Identidade.API.Models;
 
 namespace SE.Identidade.API.Controllers
 {
+    [ApiController]
     [Route("api/identidade")]
     public class AuthController : Controller
     {
@@ -17,9 +18,9 @@ namespace SE.Identidade.API.Controllers
         }
 
         [HttpPost("nova-conta")]
-        public async Task<ActionResult> Registrar(UsuarioRegistro usuarioRegistro)
+        public async Task<ActionResult> Registrar([FromBody] UsuarioRegistro usuarioRegistro)
         {
-            if(!ModelState.IsValid) return BadRequest(ModelState);
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var user = new IdentityUser
             {
@@ -30,7 +31,7 @@ namespace SE.Identidade.API.Controllers
 
             var result = await _userManager.CreateAsync(user, usuarioRegistro.Senha);
 
-            if(result.Succeeded)
+            if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, false);
 
@@ -41,14 +42,14 @@ namespace SE.Identidade.API.Controllers
         }
 
         [HttpPost("autenticar")]
-        public async Task<ActionResult> Login(UsuarioLogin usuarioLogin)
+        public async Task<ActionResult> Login([FromBody] UsuarioLogin usuarioLogin)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var result = await _signInManager.PasswordSignInAsync(
-                usuarioLogin.Email, 
-                usuarioLogin.Senha, 
-                false, 
+                usuarioLogin.Email,
+                usuarioLogin.Senha,
+                false,
                 true);
 
             if (result.Succeeded)
