@@ -13,15 +13,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{B1530C79-A63
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identidade", "Identidade", "{CDBE0EB8-60A8-4BE4-B786-91ECAC2059D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SE.Identidade.API", "src\services\SE.Identidade.API\SE.Identidade.API.csproj", "{9E0E90D5-24E5-4E3F-83C0-029746B2DC5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SE.Identidade.API", "src\services\SE.Identidade.API\SE.Identidade.API.csproj", "{9E0E90D5-24E5-4E3F-83C0-029746B2DC5C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MVC", "MVC", "{351D8905-8D81-4A62-A63D-1EAB304C2190}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SE.WebApp.MVC", "src\web\SE.WebApp.MVC\SE.WebApp.MVC.csproj", "{5A447A4B-B848-4E3B-BF4F-18DE323E88B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SE.WebApp.MVC", "src\web\SE.WebApp.MVC\SE.WebApp.MVC.csproj", "{5A447A4B-B848-4E3B-BF4F-18DE323E88B6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{AFBC5F01-3944-4764-8BEE-760F20E3C353}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SE.Core", "src\building blocks\SE.Core\SE.Core.csproj", "{E4A3F04D-D952-4014-A980-A11831FA9D83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SE.Core", "src\building blocks\SE.Core\SE.Core.csproj", "{E4A3F04D-D952-4014-A980-A11831FA9D83}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Carrinho", "Carrinho", "{20C19561-2DA0-442E-B08F-F583F21BE40F}"
 EndProject
@@ -33,15 +33,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pagamento", "Pagamento", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pedido", "Pedido", "{99394080-FED5-429B-88FE-312FB6EE3322}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SE.Carrinho.API", "src\services\SE.Carrinho.API\SE.Carrinho.API.csproj", "{E8F078D9-0AA0-45BC-979E-DE1611533815}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SE.Carrinho.API", "src\services\SE.Carrinho.API\SE.Carrinho.API.csproj", "{E8F078D9-0AA0-45BC-979E-DE1611533815}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SE.Catalogo.API", "src\services\SE.Catalogo.API\SE.Catalogo.API.csproj", "{FA2AA2FE-DDAC-425D-A3FC-1100F0A8FCE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SE.Catalogo.API", "src\services\SE.Catalogo.API\SE.Catalogo.API.csproj", "{FA2AA2FE-DDAC-425D-A3FC-1100F0A8FCE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SE.Cliente.API", "src\services\SE.Cliente.API\SE.Cliente.API.csproj", "{C0774EB9-A5F6-41AB-A0FB-C6122458D19E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SE.Cliente.API", "src\services\SE.Cliente.API\SE.Cliente.API.csproj", "{C0774EB9-A5F6-41AB-A0FB-C6122458D19E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SE.Pagamento.API", "src\services\SE.Pagamento.API\SE.Pagamento.API.csproj", "{D5E1E70C-99FB-4EC3-8DE0-47ABF94644BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SE.Pagamento.API", "src\services\SE.Pagamento.API\SE.Pagamento.API.csproj", "{D5E1E70C-99FB-4EC3-8DE0-47ABF94644BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SE.Pedido.API", "src\services\SE.Pedido.API\SE.Pedido.API.csproj", "{1FC7D046-5919-40D8-98C8-054DB2E938BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SE.Pedido.API", "src\services\SE.Pedido.API\SE.Pedido.API.csproj", "{1FC7D046-5919-40D8-98C8-054DB2E938BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SE.WebApp.MvcTeste", "src\web\SE.WebApp.MvcTeste\SE.WebApp.MvcTeste.csproj", "{F19CF4A1-6CD9-4BAC-985C-F0634DE0ADFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +83,10 @@ Global
 		{1FC7D046-5919-40D8-98C8-054DB2E938BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FC7D046-5919-40D8-98C8-054DB2E938BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FC7D046-5919-40D8-98C8-054DB2E938BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F19CF4A1-6CD9-4BAC-985C-F0634DE0ADFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F19CF4A1-6CD9-4BAC-985C-F0634DE0ADFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F19CF4A1-6CD9-4BAC-985C-F0634DE0ADFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F19CF4A1-6CD9-4BAC-985C-F0634DE0ADFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,6 +111,7 @@ Global
 		{C0774EB9-A5F6-41AB-A0FB-C6122458D19E} = {7C647B39-0687-4B05-A5FF-53FD35DC1BF0}
 		{D5E1E70C-99FB-4EC3-8DE0-47ABF94644BD} = {00CB0001-46AB-4F78-AD0A-CA6460CE6842}
 		{1FC7D046-5919-40D8-98C8-054DB2E938BB} = {99394080-FED5-429B-88FE-312FB6EE3322}
+		{F19CF4A1-6CD9-4BAC-985C-F0634DE0ADFA} = {351D8905-8D81-4A62-A63D-1EAB304C2190}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {911D4659-2F04-4F37-B80B-0D01B6A6ABE0}
