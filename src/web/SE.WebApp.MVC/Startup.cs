@@ -16,6 +16,8 @@ namespace SE.WebApp.MVC
             services.AddIdentityConfiguration();
 
             services.AddMvcConfiguration();
+
+            services.RegisterServices();
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment environment)
