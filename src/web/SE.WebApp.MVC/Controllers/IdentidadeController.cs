@@ -70,6 +70,7 @@ namespace SE.WebApp.MVC.Controllers
         public async Task<IActionResult> Logout()
         {
             // Limpar o cookie da APP
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
             return RedirectToAction("Index", "Home");
         }
