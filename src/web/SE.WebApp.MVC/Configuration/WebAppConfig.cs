@@ -1,4 +1,6 @@
-﻿namespace SE.WebApp.MVC.Configuration
+﻿using SE.WebApp.MVC.Extensions;
+
+namespace SE.WebApp.MVC.Configuration
 {
     public static class WebAppConfig
     {
@@ -11,7 +13,8 @@
         {
             if (!app.Environment.IsDevelopment())
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/erro/500");
+                app.UseStatusCodePagesWithRedirects("/erro/{0}");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
@@ -26,6 +29,8 @@
             app.UseRouting();
 
             app.UseIdentityConfiguration();
+
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.MapControllerRoute(
                 name: "default",
