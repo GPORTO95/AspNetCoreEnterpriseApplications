@@ -1,4 +1,5 @@
-﻿@Model SE.WebApp.MVC.Models.ErrorViewModel
+﻿@Model SE.WebApp.MVC.Models.ErrorViewModel;
+
 @{
     ViewData["Title"] = "Ocorreu um erro";
 }
@@ -12,7 +13,7 @@
     }
     else
     {
-        ViewData["Title"] = Model.Titutlo;
+        ViewData["Title"] = Model.Titulo;
 
         <div>
             <h2>@Html.Raw(Model.Mensagem)</h2>

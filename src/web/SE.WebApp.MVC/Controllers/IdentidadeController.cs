@@ -43,15 +43,19 @@ namespace SE.WebApp.MVC.Controllers
 
         [HttpGet]
         [Route("login")]
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl = null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
+
             return View();
         }
 
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login(UsuarioLogin usuarioLogin)
+        public async Task<IActionResult> Login(UsuarioLogin usuarioLogin, string returnUrl = null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
+
             if (!ModelState.IsValid) return View(usuarioLogin);
 
             // API - Login
@@ -62,7 +66,9 @@ namespace SE.WebApp.MVC.Controllers
             // Realizar login na APP
             await RealizarLogin(resposta);
 
-            return RedirectToAction("Index", "Home");
+            if(string.IsNullOrEmpty(returnUrl)) return RedirectToAction("Index", "Home");
+
+            return LocalRedirect(returnUrl);
         }
 
         [HttpGet]

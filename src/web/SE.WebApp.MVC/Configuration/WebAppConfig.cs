@@ -11,17 +11,18 @@ namespace SE.WebApp.MVC.Configuration
 
         public static void UseMvcConfiguration(this WebApplication app, IWebHostEnvironment environment)
         {
-            if (!app.Environment.IsDevelopment())
-            {
-                app.UseExceptionHandler("/erro/500");
-                app.UseStatusCodePagesWithRedirects("/erro/{0}");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-            else
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            //if (!app.Environment.IsDevelopment())
+            //{
+                
+            //}
+            //else
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
+
+            app.UseExceptionHandler("/erro/500");
+            app.UseStatusCodePagesWithRedirects("/erro/{0}");
+            app.UseHsts();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
