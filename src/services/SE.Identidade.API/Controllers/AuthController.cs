@@ -31,8 +31,6 @@ namespace SE.Identidade.API.Controllers
         [HttpPost("nova-conta")]
         public async Task<IActionResult> Registrar([FromBody] UsuarioRegistro usuarioRegistro)
         {
-            return StatusCode(401);
-
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 
             var user = new IdentityUser
