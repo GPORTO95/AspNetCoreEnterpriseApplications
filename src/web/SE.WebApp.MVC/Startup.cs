@@ -6,16 +6,27 @@ namespace SE.WebApp.MVC
     {
         public IConfiguration Configuration { get; }
 
-        public Startup(IConfiguration configuration)
+        public Startup(IHostEnvironment hostEnvironment)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(hostEnvironment.ContentRootPath)
+                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile($"appsettings.{hostEnvironment.EnvironmentName}.json", true, true)
+                .AddEnvironmentVariables();
+
+            if (hostEnvironment.IsDevelopment())
+            {
+                builder.AddUserSecrets<Startup>();
+            }
+
+            Configuration = builder.Build();
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddIdentityConfiguration();
 
-            services.AddMvcConfiguration();
+            services.AddMvcConfiguration(Configuration);
 
             services.RegisterServices();
         }
@@ -37,7 +48,7 @@ namespace SE.WebApp.MVC
     {
         public static WebApplicationBuilder UseStartup<TSartup>(this WebApplicationBuilder WebAppBuilder) where TSartup : IStartup
         {
-            var startup = Activator.CreateInstance(typeof(TSartup), WebAppBuilder.Configuration) as IStartup;
+            var startup = Activator.CreateInstance(typeof(TSartup), WebAppBuilder.Environment) as IStartup;
             if (startup == null) throw new ArgumentException("Classe Startup.cs inválida!");
 
             startup.ConfigureServices(WebAppBuilder.Services);

@@ -1,4 +1,6 @@
-﻿using SE.WebApp.MVC.Models;
+﻿using Microsoft.Extensions.Options;
+using SE.WebApp.MVC.Extensions;
+using SE.WebApp.MVC.Models;
 
 namespace SE.WebApp.MVC.Services
 {
@@ -6,8 +8,12 @@ namespace SE.WebApp.MVC.Services
     {
         private readonly HttpClient _httpClient;
 
-        public AutenticacaoService(HttpClient httpClient)
+        public AutenticacaoService(
+            HttpClient httpClient,
+            IOptions<AppSettings> settings)
         {
+            httpClient.BaseAddress = new Uri(settings.Value.AutenticacaoUrl);
+
             _httpClient = httpClient;
         }
 
@@ -15,7 +21,7 @@ namespace SE.WebApp.MVC.Services
         {
             var loginContent = ObterConteudo(usuarioLogin);
 
-            var response = await _httpClient.PostAsync("https://localhost:7232/api/identidade/autenticar", loginContent);
+            var response = await _httpClient.PostAsync("/api/identidade/autenticar", loginContent);
 
             if (!TratarErrosResponse(response))
             {
@@ -32,7 +38,7 @@ namespace SE.WebApp.MVC.Services
         {
             var registroContent = ObterConteudo(usuarioRegistro);
 
-            var response = await _httpClient.PostAsync("https://localhost:7232/api/identidade/nova-conta", registroContent);
+            var response = await _httpClient.PostAsync("/api/identidade/nova-conta", registroContent);
 
             if (!TratarErrosResponse(response))
             {
