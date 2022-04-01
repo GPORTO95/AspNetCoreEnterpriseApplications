@@ -1,4 +1,9 @@
-﻿namespace SE.Catalogo.API
+﻿using Microsoft.EntityFrameworkCore;
+using SE.Catalogo.API.Data;
+using SE.Catalogo.API.Data.Repository;
+using SE.Catalogo.API.Models;
+
+namespace SE.Catalogo.API
 {
     public class Startup : IStartup
     {
@@ -12,11 +17,17 @@
         public void ConfigureServices(IServiceCollection services)
         {
             // Add services to the container.
+            services.AddDbContext<CatalogoContext>(options => 
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllers();
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
+
+            services.AddScoped<IProdutoRepository, ProdutoRepository>();
+            services.AddScoped<CatalogoContext>();
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment environment)

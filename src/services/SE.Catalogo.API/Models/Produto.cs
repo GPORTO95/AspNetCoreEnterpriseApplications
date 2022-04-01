@@ -2,7 +2,7 @@
 
 namespace SE.Catalogo.API.Models
 {
-    public class Produto : Entity
+    public class Produto : Entity, IAggregateRoot
     {
         public int QuantidadeEstoque { get; set; }
 
