@@ -1,7 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SE.Catalogo.API.Data;
-using SE.Catalogo.API.Data.Repository;
-using SE.Catalogo.API.Models;
+﻿using SE.Catalogo.API.Configuration;
 
 namespace SE.Catalogo.API
 {
@@ -9,41 +6,36 @@ namespace SE.Catalogo.API
     {
         public IConfiguration Configuration { get; }
 
-        public Startup(IConfiguration configuration)
+        public Startup(IHostEnvironment hostEnvironment)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(hostEnvironment.ContentRootPath)
+                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile($"appsettings.{hostEnvironment.EnvironmentName}.json", true, true)
+                .AddEnvironmentVariables();
+
+            if (hostEnvironment.IsDevelopment())
+            {
+                builder.AddUserSecrets<Startup>();
+            }
+
+            Configuration = builder.Build();
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add services to the container.
-            services.AddDbContext<CatalogoContext>(options => 
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddApiConfiguration(Configuration);
 
-            services.AddControllers();
+            services.AddSwaggerConfiguration();
 
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            services.AddEndpointsApiExplorer();
-            services.AddSwaggerGen();
-
-            services.AddScoped<IProdutoRepository, ProdutoRepository>();
-            services.AddScoped<CatalogoContext>();
+            services.AddDIConfiguration(Configuration);
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment environment)
         {
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+            app.UseSwaggerConfiguration();
 
-            app.UseHttpsRedirection();
-
-            app.UseAuthorization();
-
-            app.MapControllers();
+            app.UseApiConfiguration(environment);
         }
     }
 
@@ -58,7 +50,7 @@ namespace SE.Catalogo.API
     {
         public static WebApplicationBuilder UseStartup<TSartup>(this WebApplicationBuilder WebAppBuilder) where TSartup : IStartup
         {
-            var startup = Activator.CreateInstance(typeof(TSartup), WebAppBuilder.Configuration) as IStartup;
+            var startup = Activator.CreateInstance(typeof(TSartup), WebAppBuilder.Environment) as IStartup;
             if (startup == null) throw new ArgumentException("Classe Startup.cs inválida!");
 
             startup.ConfigureServices(WebAppBuilder.Services);
