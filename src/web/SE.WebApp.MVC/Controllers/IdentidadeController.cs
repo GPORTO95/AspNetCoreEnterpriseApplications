@@ -38,7 +38,7 @@ namespace SE.WebApp.MVC.Controllers
             // Realizar login na APP
             await RealizarLogin(resposta);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Catalogo");
         }
 
         [HttpGet]
@@ -66,7 +66,7 @@ namespace SE.WebApp.MVC.Controllers
             // Realizar login na APP
             await RealizarLogin(resposta);
 
-            if(string.IsNullOrEmpty(returnUrl)) return RedirectToAction("Index", "Home");
+            if(string.IsNullOrEmpty(returnUrl)) return RedirectToAction("Index", "Catalogo");
 
             return LocalRedirect(returnUrl);
         }
@@ -78,7 +78,7 @@ namespace SE.WebApp.MVC.Controllers
             // Limpar o cookie da APP
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Catalogo");
         }
 
         private async Task RealizarLogin(UsuarioRespostaLogin resposta)

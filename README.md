@@ -31,3 +31,7 @@ Projeto de um e-commerce com base no curso da Desenvolvedor.IO
 - Habilitar o Event Store (Após executar o passo a passo de instalação conforme a documentação) [Quick start](https://developers.eventstore.com/server/v21.2/docs/installation/#configuration-wizard)
   - Posicionar o cmd na pasta instalada, provavelmente no seu C:\ESDB ou qualquer outro diretorio, no meu caso está no D:\ESDB
   - Executar comando EventStore.ClusterNode.exe --config D:\ESDB\eventstore.conf
+
+## :package: Pacotes
+- Refit
+- HttpClient

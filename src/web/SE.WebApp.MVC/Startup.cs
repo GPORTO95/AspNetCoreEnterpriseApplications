@@ -28,7 +28,7 @@ namespace SE.WebApp.MVC
 
             services.AddMvcConfiguration(Configuration);
 
-            services.RegisterServices();
+            services.RegisterServices(Configuration);
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment environment)
