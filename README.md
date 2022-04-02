@@ -35,3 +35,4 @@ Projeto de um e-commerce com base no curso da Desenvolvedor.IO
 ## :package: Pacotes
 - Refit
 - HttpClient
+- Polly
