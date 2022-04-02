@@ -1,4 +1,5 @@
 ﻿using SE.Catalogo.API.Configuration;
+using SE.WebApi.Core.Identidade;
 
 namespace SE.Catalogo.API
 {
@@ -25,6 +26,8 @@ namespace SE.Catalogo.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApiConfiguration(Configuration);
+
+            services.AddJwtConfiguration(Configuration);
 
             services.AddSwaggerConfiguration();
 

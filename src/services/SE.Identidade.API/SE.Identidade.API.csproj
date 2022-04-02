@@ -25,4 +25,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\building blocks\SE.WebApi.Core\SE.WebApi.Core.csproj" />
+  </ItemGroup>
+
 </Project>

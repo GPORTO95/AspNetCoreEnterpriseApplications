@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SE.Catalogo.API.Data;
+using SE.WebApi.Core.Identidade;
 
 namespace SE.Catalogo.API.Configuration
 {
@@ -36,6 +37,8 @@ namespace SE.Catalogo.API.Configuration
             //app.UseRouting();
 
             app.UseCors("Total");
+
+            app.UseJwtConfiguration();
 
             app.MapControllers();
         }

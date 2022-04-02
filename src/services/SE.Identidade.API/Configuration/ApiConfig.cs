@@ -1,4 +1,6 @@
-﻿namespace SE.Identidade.API.Configuration
+﻿using SE.WebApi.Core.Identidade;
+
+namespace SE.Identidade.API.Configuration
 {
     public static class ApiConfig
     {
@@ -19,7 +21,7 @@
 
             app.UseHttpsRedirection();
 
-            app.UseIdentityConfiguration();
+            app.UseJwtConfiguration();
 
             app.MapControllers();
 
