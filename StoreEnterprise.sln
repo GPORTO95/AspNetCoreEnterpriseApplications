@@ -37,11 +37,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SE.Carrinho.API", "src\serv
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SE.Catalogo.API", "src\services\SE.Catalogo.API\SE.Catalogo.API.csproj", "{FA2AA2FE-DDAC-425D-A3FC-1100F0A8FCE1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SE.Cliente.API", "src\services\SE.Cliente.API\SE.Cliente.API.csproj", "{C0774EB9-A5F6-41AB-A0FB-C6122458D19E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SE.Cliente.API", "src\services\SE.Clientes.API\SE.Clientes.API.csproj", "{C0774EB9-A5F6-41AB-A0FB-C6122458D19E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SE.Pagamento.API", "src\services\SE.Pagamento.API\SE.Pagamento.API.csproj", "{D5E1E70C-99FB-4EC3-8DE0-47ABF94644BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SE.Pagamento.API", "src\services\SE.Pagamentos.API\SE.Pagamentos.API.csproj", "{D5E1E70C-99FB-4EC3-8DE0-47ABF94644BD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SE.Pedido.API", "src\services\SE.Pedido.API\SE.Pedido.API.csproj", "{1FC7D046-5919-40D8-98C8-054DB2E938BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SE.Pedido.API", "src\services\SE.Pedidos.API\SE.Pedidos.API.csproj", "{1FC7D046-5919-40D8-98C8-054DB2E938BB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SE.WebApp.MvcTeste", "src\web\SE.WebApp.MvcTeste\SE.WebApp.MvcTeste.csproj", "{F19CF4A1-6CD9-4BAC-985C-F0634DE0ADFA}"
 EndProject

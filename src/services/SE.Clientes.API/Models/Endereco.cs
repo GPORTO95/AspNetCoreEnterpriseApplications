@@ -1,6 +1,6 @@
 ﻿using SE.Core.DomainObjects;
 
-namespace SE.Cliente.API.Models
+namespace SE.Clientes.API.Models
 {
     public class Endereco : Entity
     {
@@ -24,7 +24,7 @@ namespace SE.Cliente.API.Models
         public string Estado { get; private set; }
 
         // EF Relation
-        public Guid ClientId { get; private set; }
+        public Guid ClienteId { get; private set; }
         public Cliente Cliente { get; protected set; }
     }
 }

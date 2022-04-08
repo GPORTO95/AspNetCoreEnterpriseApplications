@@ -1,4 +1,4 @@
-using SE.Cliente.API;
+using SE.Clientes.API;
 
 var builder = WebApplication.CreateBuilder(args)
     .UseStartup<Startup>();

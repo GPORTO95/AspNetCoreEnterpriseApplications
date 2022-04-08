@@ -1,4 +1,4 @@
-using SE.Pedido.API;
+using SE.Pedidos.API;
 
 var builder = WebApplication.CreateBuilder(args)
     .UseStartup<Startup>();

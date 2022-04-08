@@ -1,4 +1,4 @@
-﻿namespace SE.Pagamento.API
+﻿namespace SE.Pedidos.API
 {
     public class Startup : IStartup
     {
