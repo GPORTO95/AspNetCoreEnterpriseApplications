@@ -1,8 +1,9 @@
 ﻿using FluentValidation.Results;
+using MediatR;
 
 namespace SE.Core.Messages
 {
-    public abstract class Command : Message
+    public abstract class Command : Message, IRequest<ValidationResult>
     {
         protected Command()
         {

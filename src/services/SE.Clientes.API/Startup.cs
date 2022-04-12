@@ -1,5 +1,7 @@
-﻿using SE.Clientes.API.Configuration;
+﻿using MediatR;
+using SE.Clientes.API.Configuration;
 using SE.WebApi.Core.Identidade;
+
 
 namespace SE.Clientes.API
 {
@@ -30,6 +32,8 @@ namespace SE.Clientes.API
             services.AddJwtConfiguration(Configuration);
 
             services.AddSwaggerConfiguration();
+
+            services.AddMediatR(typeof(Startup));
 
             services.RegisterServices();
         }
