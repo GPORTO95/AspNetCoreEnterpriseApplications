@@ -1,4 +1,5 @@
-﻿using SE.Core.Messages;
+﻿using FluentValidation;
+using SE.Core.Messages;
 
 namespace SE.Clientes.API.Application.Commands
 {
@@ -17,5 +18,43 @@ namespace SE.Clientes.API.Application.Commands
         public string Nome { get; private set; }
         public string Email { get; private set; }
         public string Cpf { get; private set; }
+
+        public override bool EhValido()
+        {
+            ValidationResult = new RegistrarClienteValidation().Validate(this);
+            return ValidationResult.IsValid;
+        }
+    }
+
+    public class RegistrarClienteValidation : AbstractValidator<RegistrarClienteCommand>
+    {
+        public RegistrarClienteValidation()
+        {
+            RuleFor(c => c.Id)
+                .NotEqual(Guid.Empty)
+                .WithMessage("Id do cliente inválido");
+
+            RuleFor(c => c.Nome)
+                .NotEmpty()
+                .WithMessage("O nome do cliente não foi informado");
+
+            RuleFor(c => c.Cpf)
+                .Must(TerCpfValido)
+                .WithMessage("O CPF informado não é válido");
+
+            RuleFor(c => c.Email)
+                .Must(TerEmailValido)
+                .WithMessage("O E-mail informado não é válido");
+        }
+
+        protected static bool TerCpfValido(string cpf)
+        {
+            return Core.DomainObjects.Cpf.Validar(cpf);
+        }
+
+        protected static bool TerEmailValido(string email)
+        {
+            return Core.DomainObjects.Email.Validar(email);
+        }
     }
 }
