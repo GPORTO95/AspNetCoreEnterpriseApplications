@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FluentValidation.Results;
+using Microsoft.EntityFrameworkCore;
 using SE.Clientes.API.Models;
 using SE.Core.Data;
 using SE.Core.DomainObjects;
 using SE.Core.Mediator;
+using SE.Core.Messages;
 
 namespace SE.Clientes.API.Data
 {
@@ -23,6 +25,9 @@ namespace SE.Clientes.API.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Ignore<ValidationResult>();
+            modelBuilder.Ignore<Event>();
+
             foreach (var property in modelBuilder.Model.GetEntityTypes().SelectMany(
                 e => e.GetProperties().Where(p => p.ClrType == typeof(string))))
             {

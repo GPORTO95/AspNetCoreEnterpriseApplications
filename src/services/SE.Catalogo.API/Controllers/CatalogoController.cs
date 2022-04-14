@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SE.Catalogo.API.Models;
+using SE.WebApi.Core.Controllers;
 using SE.WebApi.Core.Identidade;
 
 namespace SE.Catalogo.API.Controllers
 {
-    [ApiController]
     [Authorize]
-    public class CatalogoController : ControllerBase
+    public class CatalogoController : MainController
     {
         private readonly IProdutoRepository _produtoRepository;
 

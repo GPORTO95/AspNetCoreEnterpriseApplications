@@ -13,7 +13,7 @@ namespace SE.Clientes.API.Data.Repository
             _context = context;
         }
 
-        public IUnitOfWork unitOfWork => _context;
+        public IUnitOfWork UnitOfWork => _context;
 
         public async Task<IEnumerable<Cliente>> ObterTodos()
         {
