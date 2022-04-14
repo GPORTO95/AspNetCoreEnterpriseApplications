@@ -5,6 +5,7 @@ using SE.Core.Mediator;
 using MediatR;
 using SE.Clientes.API.Models;
 using SE.Clientes.API.Data.Repository;
+using SE.Clientes.API.Application.Events;
 
 namespace SE.Clientes.API.Configuration
 {
@@ -14,6 +15,8 @@ namespace SE.Clientes.API.Configuration
         {   
             services.AddScoped<IMediatorHandler, MediatorHandler>();
             services.AddScoped<IRequestHandler<RegistrarClienteCommand, ValidationResult>, ClienteCommandHandler>();
+
+            services.AddScoped<INotificationHandler<ClienteRegistradoEvent>, ClienteEventHandler>();
 
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<ClientesContext>();

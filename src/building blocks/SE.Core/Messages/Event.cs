@@ -1,6 +1,14 @@
-﻿namespace SE.Core.Messages
+﻿using MediatR;
+
+namespace SE.Core.Messages
 {
-    public class Event : Message
+    public class Event : Message, INotification
     {
+        public DateTime Timestamp { get; private set; }
+
+        public Event()
+        {
+            Timestamp = DateTime.Now;
+        }
     }
 }
