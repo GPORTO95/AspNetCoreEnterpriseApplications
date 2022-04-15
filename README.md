@@ -32,4 +32,4 @@ Projeto de um e-commerce com base no curso da Desenvolvedor.IO
 - Refit
 - HttpClient
 - Polly
-
+- EasyNetQ

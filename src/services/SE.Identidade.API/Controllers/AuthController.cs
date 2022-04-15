@@ -25,12 +25,11 @@ namespace SE.Identidade.API.Controllers
         public AuthController(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-            IOptions<AppSettings> appSettings, IBus bus)
+            IOptions<AppSettings> appSettings)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _appSettings = appSettings.Value;
-            _bus = bus;
         }
 
         [HttpPost("nova-conta")]
@@ -49,7 +48,7 @@ namespace SE.Identidade.API.Controllers
 
             if (result.Succeeded)
             {
-                await RegistrarCliente(usuarioRegistro);
+                var sucesso = await RegistrarCliente(usuarioRegistro);
 
                 return CustomResponse(await GerarJwt(usuarioRegistro.Email));
             }

@@ -6,6 +6,7 @@ using MediatR;
 using SE.Clientes.API.Models;
 using SE.Clientes.API.Data.Repository;
 using SE.Clientes.API.Application.Events;
+using SE.Clientes.API.Services;
 
 namespace SE.Clientes.API.Configuration
 {
@@ -20,6 +21,8 @@ namespace SE.Clientes.API.Configuration
 
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<ClientesContext>();
+
+            services.AddHostedService<RegistroClienteIntegrationHandler>();
         }
     }
 }
