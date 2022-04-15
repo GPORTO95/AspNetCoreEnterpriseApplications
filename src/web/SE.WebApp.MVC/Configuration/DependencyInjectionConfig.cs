@@ -4,6 +4,7 @@ using SE.WebApp.MVC.Services.Handlers;
 using Polly;
 using Polly.Extensions.Http;
 using Polly.Retry;
+using Microsoft.AspNetCore.Mvc.DataAnnotations;
 
 namespace SE.WebApp.MVC.Configuration
 {
@@ -11,6 +12,8 @@ namespace SE.WebApp.MVC.Configuration
     {
         public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddSingleton<IValidationAttributeAdapterProvider, CpfValidationAttributeAdpterProvider>();
+
             services.AddTransient<HttpClientAuthorizationDelegateHandler>();
 
             services.AddHttpClient<IAutenticacaoService, AutenticacaoService>();

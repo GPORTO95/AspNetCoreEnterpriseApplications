@@ -11,7 +11,7 @@ namespace SE.Core.DomainObjects
             Id = Guid.NewGuid();
         }
 
-        private List<Event> _notificacoes;
+        private List<Event> _notificacoes = new();
         public IReadOnlyCollection<Event> Notificacoes => _notificacoes.AsReadOnly();
 
         public void AdicionarEvento(Event evento)
