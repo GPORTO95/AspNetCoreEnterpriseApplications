@@ -29,6 +29,8 @@ namespace SE.Identidade.API
             services.AddApiConfiguration();
 
             services.AddSwaggerConfiguration();
+
+            services.AddMessageBusConfiguration(Configuration);
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment environment)
