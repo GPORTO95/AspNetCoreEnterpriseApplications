@@ -5,6 +5,7 @@ using Polly;
 using Polly.Extensions.Http;
 using Polly.Retry;
 using Microsoft.AspNetCore.Mvc.DataAnnotations;
+using SE.WebApi.Core.Usuario;
 
 namespace SE.WebApp.MVC.Configuration
 {
@@ -27,7 +28,7 @@ namespace SE.WebApp.MVC.Configuration
             //    p.WaitAndRetryAsync(3, _ => TimeSpan.FromMilliseconds(600)));
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<IUser, AspNetUser>();
+            services.AddScoped<IAspNetUser, AspNetUser>();
 
             #region :: Uso com Refit ::
             //services.AddHttpClient("Refit", options =>
