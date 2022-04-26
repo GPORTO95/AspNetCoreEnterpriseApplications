@@ -1,4 +1,6 @@
-﻿using SE.WebApi.Core.Identidade;
+﻿using Microsoft.EntityFrameworkCore;
+using SE.Carrinho.API.Data;
+using SE.WebApi.Core.Identidade;
 
 namespace SE.Carrinho.API.Configuration
 {
@@ -6,6 +8,9 @@ namespace SE.Carrinho.API.Configuration
     {
         public static void AddApiConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddDbContext<CarrinhoContext>(options =>
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
             services.AddControllers();
 
             services.AddCors(options =>

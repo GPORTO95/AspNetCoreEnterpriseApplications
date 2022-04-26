@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>02998c0c-e21d-477c-9f05-30447e701f04</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
@@ -20,8 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
-    <Folder Include="Model\" />
+    <ProjectReference Include="..\..\building blocks\SE.WebApi.Core\SE.WebApi.Core.csproj" />
   </ItemGroup>
 
 </Project>
