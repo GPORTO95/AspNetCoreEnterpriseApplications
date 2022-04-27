@@ -43,7 +43,7 @@ namespace SE.WebApi.Core.Controllers
             return CustomResponse();
         }
 
-        bool OperacaoValida()
+        protected bool OperacaoValida()
         {
             return !Erros.Any();
         }
