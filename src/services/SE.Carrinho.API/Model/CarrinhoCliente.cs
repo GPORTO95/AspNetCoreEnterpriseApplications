@@ -49,5 +49,31 @@
             Itens.Add(item);
             CalcularValorCarrinho();
         }
+
+        internal void AtualizarItem(CarrinhoItem item)
+        {
+            if (!item.EhValido()) return;
+            item.AssociarCarrinho(Id);
+
+            var itemExistente = ObterPorProdutoId(item.ProdutoId);
+
+            Itens.Remove(itemExistente);
+            Itens.Add(item);
+
+            CalcularValorCarrinho();
+        }
+
+        internal void AtualizarUnidades(CarrinhoItem item, int unidades)
+        {
+            item.AtualizarUndiades(unidades);
+            AtualizarItem(item);
+        }
+
+        internal void RemoverItem(CarrinhoItem item)
+        {
+            Itens.Remove(ObterPorProdutoId(item.ProdutoId));
+
+            CalcularValorCarrinho();
+        }
     }
 }

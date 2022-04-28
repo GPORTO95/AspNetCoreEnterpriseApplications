@@ -28,9 +28,14 @@ namespace SE.Carrinho.API.Model
             return Quantidade * Valor;
         }
 
-        internal void AdicionarUnidades(int quantidade)
+        internal void AdicionarUnidades(int unidades)
         {
-            Quantidade += quantidade;
+            Quantidade += unidades;
+        }
+
+        internal void AtualizarUndiades(int unidades)
+        {
+            Quantidade = unidades;
         }
 
         internal bool EhValido()
