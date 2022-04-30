@@ -14,32 +14,34 @@ namespace SE.WebApp.MVC.Configuration
         public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddSingleton<IValidationAttributeAdapterProvider, CpfValidationAttributeAdpterProvider>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IAspNetUser, AspNetUser>();
 
+            #region :: HttpService ::
             services.AddTransient<HttpClientAuthorizationDelegateHandler>();
 
-            services.AddHttpClient<IAutenticacaoService, AutenticacaoService>();
+            services.AddHttpClient<IAutenticacaoService, AutenticacaoService>()
+                .AddPolicyHandler(PollyExtensions.EsperarTentar())
+                .AddTransientHttpErrorPolicy(p =>
+                    p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
             services.AddHttpClient<ICatalogoService, CatalogoService>()
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegateHandler>()
                 .AddPolicyHandler(PollyExtensions.EsperarTentar())
                 .AddTransientHttpErrorPolicy(p => 
                     p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
-            //.AddTransientHttpErrorPolicy(p => 
-            //    p.WaitAndRetryAsync(3, _ => TimeSpan.FromMilliseconds(600)));
 
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<IAspNetUser, AspNetUser>();
-
-            #region :: Uso com Refit ::
-            //services.AddHttpClient("Refit", options =>
-            //{
-            //    options.BaseAddress = new Uri(configuration.GetSection("CatalogoUrl").Value);
-            //}).AddHttpMessageHandler<HttpClientAuthorizationDelegateHandler>()
-            //    .AddTypedClient(Refit.RestService.For<ICatalogoServiceRefit>);
+            services.AddHttpClient<ICarrinhoService, CarrinhoService>()
+                .AddHttpMessageHandler<HttpClientAuthorizationDelegateHandler>()
+                .AddPolicyHandler(PollyExtensions.EsperarTentar())
+                .AddTransientHttpErrorPolicy(p =>
+                    p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
             #endregion
         }
     }
 
+
+    #region :: Polly Extensions ::
     public class PollyExtensions
     {
         public static AsyncRetryPolicy<HttpResponseMessage> EsperarTentar()
@@ -61,4 +63,5 @@ namespace SE.WebApp.MVC.Configuration
             return retry;
         }
     }
+    #endregion
 }
