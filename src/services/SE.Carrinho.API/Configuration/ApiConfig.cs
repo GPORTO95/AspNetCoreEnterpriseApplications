@@ -30,10 +30,9 @@ namespace SE.Carrinho.API.Configuration
                 app.UseDeveloperExceptionPage();
             }
 
-
             app.UseHttpsRedirection();
 
-            //app.UseRouting();
+            app.UseRouting();
 
             app.UseCors("Total");
 

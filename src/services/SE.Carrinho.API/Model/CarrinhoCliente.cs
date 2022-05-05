@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
+using static SE.Carrinho.API.Model.CarrinhoItem;
 
 namespace SE.Carrinho.API.Model
 {

@@ -31,7 +31,6 @@ namespace SE.Catalogo.API.Configuration
                 app.UseDeveloperExceptionPage();
             }
 
-
             app.UseHttpsRedirection();
 
             //app.UseRouting();

@@ -4,7 +4,7 @@ using SE.Carrinho.API.Model;
 
 namespace SE.Carrinho.API.Data
 {
-    public class CarrinhoContext : DbContext
+    public sealed class CarrinhoContext : DbContext
     {
         public CarrinhoContext(DbContextOptions<CarrinhoContext> options)
             : base(options)
@@ -20,9 +20,7 @@ namespace SE.Carrinho.API.Data
         {
             foreach (var property in modelBuilder.Model.GetEntityTypes().SelectMany(
                 e => e.GetProperties().Where(p => p.ClrType == typeof(string))))
-            {
                 property.SetColumnType("varchar(100)");
-            }
 
             modelBuilder.Ignore<ValidationResult>();
 
@@ -35,10 +33,7 @@ namespace SE.Carrinho.API.Data
                 .WithOne(i => i.CarrinhoCliente)
                 .HasForeignKey(c => c.CarrinhoId);
 
-            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
-            {
-                relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;
-            }
+            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys())) relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;
         }
     }
 }
