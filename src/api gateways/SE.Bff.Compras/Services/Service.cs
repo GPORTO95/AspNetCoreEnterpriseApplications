@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using SE.Core.Comunication;
+using System.Net;
 using System.Text;
 using System.Text.Json;
 
@@ -30,6 +31,11 @@ namespace SE.Bff.Compras.Services
 
             response.EnsureSuccessStatusCode();
             return true;
+        }
+
+        protected ResponseResult RetornoOk()
+        {
+            return new ResponseResult();
         }
     }
 }

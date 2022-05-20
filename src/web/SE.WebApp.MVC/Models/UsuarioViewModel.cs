@@ -1,4 +1,5 @@
-﻿using SE.WebApp.MVC.Extensions;
+﻿using SE.Core.Comunication;
+using SE.WebApp.MVC.Extensions;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 

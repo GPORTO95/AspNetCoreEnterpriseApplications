@@ -1,4 +1,5 @@
-﻿using SE.WebApp.MVC.Models;
+﻿using SE.Core.Comunication;
+using SE.WebApp.MVC.Models;
 
 namespace SE.WebApp.MVC.Services
 {
