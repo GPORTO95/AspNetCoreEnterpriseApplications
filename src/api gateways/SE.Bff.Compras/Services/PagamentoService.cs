@@ -8,7 +8,7 @@ namespace SE.Bff.Compras.Services
 
     }
 
-    public class PagamentoService : Service, ICatalogoService
+    public class PagamentoService : Service, IPagamentoService
     {
         private readonly HttpClient _httpClient;
 

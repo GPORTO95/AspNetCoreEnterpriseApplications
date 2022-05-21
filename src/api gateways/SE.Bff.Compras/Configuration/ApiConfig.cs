@@ -1,4 +1,5 @@
 ﻿using SE.Bff.Compras.Extensions;
+using SE.WebApi.Core.Identidade;
 
 namespace SE.Bff.Compras.Configuration
 {
@@ -34,7 +35,7 @@ namespace SE.Bff.Compras.Configuration
 
             app.UseCors("total");
 
-            app.UseAuthentication();
+            app.UseJwtConfiguration();
 
             app.MapControllers();
         }
