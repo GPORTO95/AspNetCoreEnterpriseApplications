@@ -42,7 +42,7 @@ namespace SE.WebApp.MVC.Configuration
 
 
     #region :: Polly Extensions ::
-    public class PollyExtensions
+    public static class PollyExtensions
     {
         public static AsyncRetryPolicy<HttpResponseMessage> EsperarTentar()
         {
