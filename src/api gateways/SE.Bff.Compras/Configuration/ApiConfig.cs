@@ -35,7 +35,7 @@ namespace SE.Bff.Compras.Configuration
 
             app.UseCors("total");
 
-            app.UseJwtConfiguration();
+            app.UseAuthConfiguration();
 
             app.MapControllers();
         }

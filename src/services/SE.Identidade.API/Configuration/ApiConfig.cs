@@ -21,7 +21,7 @@ namespace SE.Identidade.API.Configuration
 
             app.UseHttpsRedirection();
 
-            app.UseJwtConfiguration();
+            app.UseAuthConfiguration();
 
             app.MapControllers();
 

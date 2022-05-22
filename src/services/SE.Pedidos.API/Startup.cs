@@ -1,38 +1,48 @@
-﻿namespace SE.Pedidos.API
+﻿using SE.Pedidos.API.Configuration;
+using SE.WebApi.Core.Identidade;
+
+namespace SE.Pedidos.API
 {
     public class Startup : IStartup
     {
         public IConfiguration Configuration { get; }
 
-        public Startup(IConfiguration configuration)
+        public Startup(IHostEnvironment hostEnvironment)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(hostEnvironment.ContentRootPath)
+                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile($"appsettings.{hostEnvironment.EnvironmentName}.json", true, true)
+                .AddEnvironmentVariables();
+
+            if (hostEnvironment.IsDevelopment())
+            {
+                builder.AddUserSecrets<Startup>();
+            }
+
+            Configuration = builder.Build();
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add services to the container.
+            services.AddApiConfiguration(Configuration);
 
-            services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            services.AddEndpointsApiExplorer();
-            services.AddSwaggerGen();
+            services.AddJwtConfiguration(Configuration);
+
+            services.AddSwaggerConfiguration();
+
+            //services.AddMediatR(typeof(Startup));
+
+            services.RegisterServices();
+
+            services.AddMessageBusConfiguration(Configuration);
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment environment)
         {
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+            app.UseSwaggerConfiguration();
 
-            app.UseHttpsRedirection();
-
-            app.UseAuthorization();
-
-            app.MapControllers();
+            app.UseApiConfiguration(environment);
         }
     }
 
@@ -47,7 +57,7 @@
     {
         public static WebApplicationBuilder UseStartup<TSartup>(this WebApplicationBuilder WebAppBuilder) where TSartup : IStartup
         {
-            var startup = Activator.CreateInstance(typeof(TSartup), WebAppBuilder.Configuration) as IStartup;
+            var startup = Activator.CreateInstance(typeof(TSartup), WebAppBuilder.Environment) as IStartup;
             if (startup == null) throw new ArgumentException("Classe Startup.cs inválida!");
 
             startup.ConfigureServices(WebAppBuilder.Services);

@@ -37,7 +37,7 @@ namespace SE.Catalogo.API.Configuration
 
             app.UseCors("Total");
 
-            app.UseJwtConfiguration();
+            app.UseAuthConfiguration();
 
             app.MapControllers();
         }

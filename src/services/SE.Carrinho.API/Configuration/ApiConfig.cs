@@ -36,7 +36,7 @@ namespace SE.Carrinho.API.Configuration
 
             app.UseCors("Total");
 
-            app.UseJwtConfiguration();
+            app.UseAuthConfiguration();
 
             app.MapControllers();
         }

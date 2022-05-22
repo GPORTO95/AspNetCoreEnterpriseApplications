@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SE.Clientes.API.Data;
+using SE.Pedidos.Infra.Data;
 using SE.WebApi.Core.Identidade;
 
-namespace SE.Clientes.API.Configuration
+namespace SE.Pedidos.API.Configuration
 {
     public static class ApiConfig
     {
         public static void AddApiConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<ClientesContext>(options =>
+            services.AddDbContext<PedidosContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllers();
@@ -24,23 +24,25 @@ namespace SE.Clientes.API.Configuration
             });
         }
 
-        public static void UseApiConfiguration(this WebApplication app)
+        public static void UseApiConfiguration(this WebApplication app, IWebHostEnvironment env)
         {
-            if (app.Environment.IsDevelopment())
+            if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-
             app.UseHttpsRedirection();
 
-            //app.UseRouting();
+            app.UseRouting();
 
             app.UseCors("Total");
 
             app.UseAuthConfiguration();
 
-            app.MapControllers();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }

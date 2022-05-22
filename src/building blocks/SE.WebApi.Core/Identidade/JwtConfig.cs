@@ -37,7 +37,7 @@ namespace SE.WebApi.Core.Identidade
             });
         }
 
-        public static void UseJwtConfiguration(this WebApplication app)
+        public static void UseAuthConfiguration(this WebApplication app)
         {
             app.UseAuthentication();
             app.UseAuthorization();

@@ -15,7 +15,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Application\Commands\" />
+    <Folder Include="Application\DTO\" />
+    <Folder Include="Application\Events\" />
+    <Folder Include="Application\Queries\" />
     <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\building blocks\SE.Core\SE.Core.csproj" />
+    <ProjectReference Include="..\..\building blocks\SE.MessageBus\SE.MessageBus.csproj" />
+    <ProjectReference Include="..\..\building blocks\SE.WebApi.Core\SE.WebApi.Core.csproj" />
+    <ProjectReference Include="..\SE.Pedidos.Domain\SE.Pedidos.Domain.csproj" />
+    <ProjectReference Include="..\SE.Pedidos.Infra\SE.Pedidos.Infra.csproj" />
   </ItemGroup>
 
 </Project>
