@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Controllers\VoucherController.cs~RF43d04a.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
@@ -18,7 +22,6 @@
     <Folder Include="Application\DTO\" />
     <Folder Include="Application\Events\" />
     <Folder Include="Application\Queries\" />
-    <Folder Include="Controllers\" />
   </ItemGroup>
 
   <ItemGroup>
