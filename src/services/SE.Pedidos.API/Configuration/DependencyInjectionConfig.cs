@@ -1,4 +1,5 @@
 ﻿using SE.Core.Mediator;
+using SE.Pedidos.API.Application.Queries;
 using SE.Pedidos.Domain.Vouchers;
 using SE.Pedidos.Infra.Data;
 using SE.Pedidos.Infra.Data.Repository;
@@ -17,15 +18,15 @@ namespace SE.Pedidos.API.Configuration
             // Commands
             //services.AddScoped<IRequestHandler<AdicionarPedidoCommand, ValidationResult>, PedidoCommandHandler>();
 
-            //// Events
+            // Events
             //services.AddScoped<INotificationHandler<PedidoRealizadoEvent>, PedidoEventHandler>();
 
-            //// Application
-            //services.AddScoped<IMediatorHandler, MediatorHandler>();
-            //services.AddScoped<IVoucherQueries, VoucherQueries>();
+            // Application
+            services.AddScoped<IMediatorHandler, MediatorHandler>();
+            services.AddScoped<IVoucherQueries, VoucherQueries>();
             //services.AddScoped<IPedidoQueries, PedidoQueries>();
 
-            //// Data
+            // Data
             //services.AddScoped<IPedidoRepository, PedidoRepository>();
             services.AddScoped<IVoucherRepository, VoucherRepository>();
             services.AddScoped<PedidosContext>();
