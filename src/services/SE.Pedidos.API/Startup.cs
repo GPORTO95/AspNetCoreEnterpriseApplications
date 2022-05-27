@@ -1,4 +1,5 @@
-﻿using SE.Pedidos.API.Configuration;
+﻿using MediatR;
+using SE.Pedidos.API.Configuration;
 using SE.WebApi.Core.Identidade;
 
 namespace SE.Pedidos.API
@@ -31,7 +32,7 @@ namespace SE.Pedidos.API
 
             services.AddSwaggerConfiguration();
 
-            //services.AddMediatR(typeof(Startup));
+            services.AddMediatR(typeof(Startup));
 
             services.RegisterServices();
 
