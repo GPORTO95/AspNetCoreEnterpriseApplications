@@ -1,5 +1,6 @@
 ﻿using SE.Core.Mediator;
 using SE.Pedidos.API.Application.Queries;
+using SE.Pedidos.Domain.Pedidos;
 using SE.Pedidos.Domain.Vouchers;
 using SE.Pedidos.Infra.Data;
 using SE.Pedidos.Infra.Data.Repository;
@@ -27,7 +28,7 @@ namespace SE.Pedidos.API.Configuration
             //services.AddScoped<IPedidoQueries, PedidoQueries>();
 
             // Data
-            //services.AddScoped<IPedidoRepository, PedidoRepository>();
+            services.AddScoped<IPedidoRepository, PedidoRepository>();
             services.AddScoped<IVoucherRepository, VoucherRepository>();
             services.AddScoped<PedidosContext>();
         }
