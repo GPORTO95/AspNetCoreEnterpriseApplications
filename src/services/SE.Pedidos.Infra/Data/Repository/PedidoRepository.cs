@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SE.Core.Data;
 using SE.Pedidos.Domain.Pedidos;
+using System.Data.Common;
 
 namespace SE.Pedidos.Infra.Data.Repository
 {
@@ -14,6 +15,7 @@ namespace SE.Pedidos.Infra.Data.Repository
         }
 
         public IUnitOfWork UnitOfWork => _context;
+        public DbConnection ObterConexao() => _context.Database.GetDbConnection();
 
         public async Task<Pedido> ObterPorId(Guid id)
         {

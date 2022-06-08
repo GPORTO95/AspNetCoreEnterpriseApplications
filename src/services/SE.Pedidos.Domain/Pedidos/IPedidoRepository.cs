@@ -1,4 +1,5 @@
 ﻿using SE.Core.Data;
+using System.Data.Common;
 
 namespace SE.Pedidos.Domain.Pedidos
 {
@@ -8,6 +9,8 @@ namespace SE.Pedidos.Domain.Pedidos
         Task<IEnumerable<Pedido>> ObterListaPorClienteId(Guid clienteId);
         void Adicionar(Pedido pedido);
         void Atualizar(Pedido pedido);
+
+        DbConnection ObterConexao();
 
         /* Pedido Item */
         Task<PedidoItem> ObterItemPorId(Guid id);
