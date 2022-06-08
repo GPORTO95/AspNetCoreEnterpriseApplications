@@ -7,9 +7,9 @@ namespace SE.Pedidos.Domain.Pedidos
         // Ef ctor
         protected PedidoItem() { }
 
-        public PedidoItem(Guid pedidoId, Guid produtoId, string produtoNome, int quantidaade, decimal valorUnitario, string produtoImagem = null)
+        public PedidoItem(Guid produtoId, string produtoNome, int quantidaade, decimal valorUnitario, string produtoImagem = null)
         {
-            PedidoId = pedidoId;
+            //PedidoId = pedidoId;
             ProdutoId = produtoId;
             ProdutoNome = produtoNome;
             Quantidaade = quantidaade;
