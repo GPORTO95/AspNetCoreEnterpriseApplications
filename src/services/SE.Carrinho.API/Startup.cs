@@ -32,6 +32,8 @@ namespace SE.Carrinho.API
             services.AddSwaggerConfiguration();
 
             services.RegisterServices();
+
+            services.AddMessageBusConfiguration(Configuration);
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment environment)
