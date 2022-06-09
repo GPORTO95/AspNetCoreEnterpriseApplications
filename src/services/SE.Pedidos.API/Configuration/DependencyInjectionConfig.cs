@@ -1,4 +1,8 @@
-﻿using SE.Core.Mediator;
+﻿using FluentValidation.Results;
+using MediatR;
+using SE.Core.Mediator;
+using SE.Pedidos.API.Application.Commands;
+using SE.Pedidos.API.Application.Events;
 using SE.Pedidos.API.Application.Queries;
 using SE.Pedidos.Domain.Pedidos;
 using SE.Pedidos.Domain.Vouchers;
@@ -17,15 +21,15 @@ namespace SE.Pedidos.API.Configuration
             services.AddScoped<IAspNetUser, AspNetUser>();
 
             // Commands
-            //services.AddScoped<IRequestHandler<AdicionarPedidoCommand, ValidationResult>, PedidoCommandHandler>();
+            services.AddScoped<IRequestHandler<AdicionarPedidoCommand, ValidationResult>, PedidoCommandHandler>();
 
             // Events
-            //services.AddScoped<INotificationHandler<PedidoRealizadoEvent>, PedidoEventHandler>();
+            services.AddScoped<INotificationHandler<PedidoRealizadoEvent>, PedidoEventHandler>();
 
             // Application
             services.AddScoped<IMediatorHandler, MediatorHandler>();
             services.AddScoped<IVoucherQueries, VoucherQueries>();
-            //services.AddScoped<IPedidoQueries, PedidoQueries>();
+            services.AddScoped<IPedidoQueries, PedidoQueries>();
 
             // Data
             services.AddScoped<IPedidoRepository, PedidoRepository>();
