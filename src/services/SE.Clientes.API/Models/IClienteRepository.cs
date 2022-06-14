@@ -4,9 +4,12 @@ namespace SE.Clientes.API.Models
 {
     public interface IClienteRepository : IRepository<Cliente>
     {
-        void Adicionar(Cliente cliente);
-
+        // Cliente
         Task<IEnumerable<Cliente>> ObterTodos();
         Task<Cliente> ObterPorCpf(string cpf);
+        void Adicionar(Cliente cliente);
+        // Endereco
+        Task<Endereco> ObterEnderecoPorId(Guid id);
+        void AdicionarEndereco(Endereco endereco);
     }
 }
