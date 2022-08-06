@@ -2,26 +2,37 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace SE.WebApp.MVC.Models
+namespace SE.Bff.Compras.Models
 {
-    public class PedidoTransacaoViewModel
+    public class PedidoDTO
     {
-        #region :: Pedido ::
+        #region Pedido
+
+        public int Codigo { get; set; }
+        // Autorizado = 1,
+        // Pago = 2,
+        // Recusado = 3,
+        // Entregue = 4,
+        // Cancelado = 5
+        public int Status { get; set; }
+        public DateTime Data { get; set; }
         public decimal ValorTotal { get; set; }
+
         public decimal Desconto { get; set; }
         public string VoucherCodigo { get; set; }
         public bool VoucherUtilizado { get; set; }
 
-        public List<ItemCarrinhoViewModel> Itens { get; set; } = new List<ItemCarrinhoViewModel>();
-        #endregion
-
-        #region :: Endereco ::
-
-        public EnderecoViewModel Endereco { get; set; }
+        public List<ItemCarrinhoDTO> PedidoItems { get; set; }
 
         #endregion
 
-        #region :: Cartao ::
+        #region Endereco
+
+        public EnderecoDTO Endereco { get; set; }
+
+        #endregion
+
+        #region Cartão
 
         [Required(ErrorMessage = "Informe o número do cartão")]
         [DisplayName("Número do Cartão")]

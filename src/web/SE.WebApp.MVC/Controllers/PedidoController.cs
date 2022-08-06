@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SE.WebApp.MVC.Models;
 using SE.WebApp.MVC.Services;
 
 namespace SE.WebApp.MVC.Controllers
@@ -27,50 +28,50 @@ namespace SE.WebApp.MVC.Controllers
             return View(pedido);
         }
 
-        //[HttpGet]
-        //[Route("pagamento")]
-        //public async Task<IActionResult> Pagamento()
-        //{
-        //    var carrinho = await _comprasBffService.ObterCarrinho();
-        //    if (carrinho.Itens.Count == 0) return RedirectToAction("Index", "Carrinho");
+        [HttpGet]
+        [Route("pagamento")]
+        public async Task<IActionResult> Pagamento()
+        {
+            var carrinho = await _comprasBffService.ObterCarrinho();
+            if (carrinho.Itens.Count == 0) return RedirectToAction("Index", "Carrinho");
 
-        //    var pedido = _comprasBffService.MapearParaPedido(carrinho, null);
+            var pedido = _comprasBffService.MapearParaPedido(carrinho, null);
 
-        //    return View(pedido);
-        //}
+            return View(pedido);
+        }
 
-        //[HttpPost]
-        //[Route("finalizar-pedido")]
-        //public async Task<IActionResult> FinalizarPedido(PedidoTransacaoViewModel pedidoTransacao)
-        //{
-        //    if (!ModelState.IsValid) return View("Pagamento", _comprasBffService.MapearParaPedido(
-        //        await _comprasBffService.ObterCarrinho(), null));
+        [HttpPost]
+        [Route("finalizar-pedido")]
+        public async Task<IActionResult> FinalizarPedido(PedidoTransacaoViewModel pedidoTransacao)
+        {
+            if (!ModelState.IsValid) return View("Pagamento", _comprasBffService.MapearParaPedido(
+                await _comprasBffService.ObterCarrinho(), null));
 
-        //    var retorno = await _comprasBffService.FinalizarPedido(pedidoTransacao);
+            var retorno = await _comprasBffService.FinalizarPedido(pedidoTransacao);
 
-        //    if(ResponsePossuiErros(retorno))
-        //    {
-        //        var carrinho = await _comprasBffService.ObterCarrinho();
-        //        if (carrinho.Itens.Count == 0) return RedirectToAction("Index", "Carrinho");
+            if (ResponsePossuiErros(retorno))
+            {
+                var carrinho = await _comprasBffService.ObterCarrinho();
+                if (carrinho.Itens.Count == 0) return RedirectToAction("Index", "Carrinho");
 
-        //        var pedidoMap = _comprasBffService.MapearParaPedido(carrinho, null);
-        //        return View("Pagamento", pedidoMap);
-        //    }
+                var pedidoMap = _comprasBffService.MapearParaPedido(carrinho, null);
+                return View("Pagamento", pedidoMap);
+            }
 
-        //    return RedirectToAction("PedidoConcluido");
-        //}
+            return RedirectToAction("PedidoConcluido");
+        }
 
-        //[HttpGet]
-        //[Route("pedido-concluido")]
-        //public async Task<IActionResult> PedidoConcluido()
-        //{
-        //    return View("ConfirmacaoPedido", await _comprasBffService.ObterUltimoPedido());
-        //}
+        [HttpGet]
+        [Route("pedido-concluido")]
+        public async Task<IActionResult> PedidoConcluido()
+        {
+            return View("ConfirmacaoPedido", await _comprasBffService.ObterUltimoPedido());
+        }
 
-        //[HttpGet("meus-pedidos")]
-        //public async Task<IActionResult> MeusPedidos()
-        //{
-        //    return View(await _comprasBffService.ObterListaPorClienteId());
-        //}
+        [HttpGet("meus-pedidos")]
+        public async Task<IActionResult> MeusPedidos()
+        {
+            return View(await _comprasBffService.ObterListaPorClienteId());
+        }
     }
 }

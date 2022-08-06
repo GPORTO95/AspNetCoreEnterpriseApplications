@@ -1,5 +1,4 @@
 ﻿using SE.Core.Data;
-using SE.Core.DomainObjects;
 
 namespace SE.Catalogo.API.Models
 {
@@ -7,6 +6,7 @@ namespace SE.Catalogo.API.Models
     {
         Task<IEnumerable<Produto>> ObterTodos();
         Task<Produto> ObterPorId(Guid id);
+        Task<List<Produto>> ObterProdutosPorId(string ids);
 
         void Adicionar(Produto produto);
         void Atualizar(Produto produto);
