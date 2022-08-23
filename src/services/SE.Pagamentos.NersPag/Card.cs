@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SE.Pagamentos.NersPag
 {
-    public class Card
+    public class CardHash
     {
-        public Card(NerdsPagService nerdsPagService)
+        public CardHash(NerdsPagService nerdsPagService)
         {
             NerdsPagService = nerdsPagService;
         }
