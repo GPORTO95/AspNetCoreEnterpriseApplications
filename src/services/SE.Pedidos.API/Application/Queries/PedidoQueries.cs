@@ -47,6 +47,9 @@ namespace SE.Pedidos.API.Application.Queries
 
         private PedidoDTO MapearPedido(dynamic result)
         {
+            if(result.Count == 0)
+                return null;
+
             var pedido = new PedidoDTO
             {
                 Codigo = result[0].CODIGO,

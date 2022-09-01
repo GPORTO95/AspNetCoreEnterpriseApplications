@@ -47,14 +47,14 @@ namespace SE.Pagamentos.API.Services
             return new ResponseMessage(validationResult);
         }
 
-        public Task<ResponseMessage> CancelarPagamento(Guid pedidoId)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<ResponseMessage> CancelarPagamento(Guid pedidoId)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public Task<ResponseMessage> CapturarPagamento(Guid pedidoId)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<ResponseMessage> CapturarPagamento(Guid pedidoId)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

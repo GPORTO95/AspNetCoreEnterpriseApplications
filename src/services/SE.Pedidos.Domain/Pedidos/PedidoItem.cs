@@ -7,12 +7,12 @@ namespace SE.Pedidos.Domain.Pedidos
         // Ef ctor
         protected PedidoItem() { }
 
-        public PedidoItem(Guid produtoId, string produtoNome, int quantidaade, decimal valorUnitario, string produtoImagem = null)
+        public PedidoItem(Guid produtoId, string produtoNome, int quantidade, decimal valorUnitario, string produtoImagem = null)
         {
             //PedidoId = pedidoId;
             ProdutoId = produtoId;
             ProdutoNome = produtoNome;
-            Quantidaade = quantidaade;
+            Quantidade = quantidade;
             ValorUnitario = valorUnitario;
             ProdutoImagem = produtoImagem;
         }
@@ -20,7 +20,7 @@ namespace SE.Pedidos.Domain.Pedidos
         public Guid PedidoId { get; private set; }
         public Guid ProdutoId { get; private set; }
         public string ProdutoNome { get; private set; }
-        public int Quantidaade { get; private set; }
+        public int Quantidade { get; private set; }
         public decimal ValorUnitario { get; private set; }
         public string ProdutoImagem { get; private set; }
 
@@ -28,6 +28,6 @@ namespace SE.Pedidos.Domain.Pedidos
         public Pedido Pedido { get; private set; }
 
         internal decimal CalcularValor() =>
-            Quantidaade * ValorUnitario;
+            Quantidade * ValorUnitario;
     }
 }

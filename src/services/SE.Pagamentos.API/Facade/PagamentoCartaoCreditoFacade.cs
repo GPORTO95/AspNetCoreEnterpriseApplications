@@ -43,15 +43,15 @@ namespace SE.Pagamentos.API.Facade
             return ParaTransacao(await transacao.AuthorizeCardTransaction());
         }
 
-        public Task<Transacao> CapturarPagamento(Transacao transacao)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<Transacao> CapturarPagamento(Transacao transacao)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public Task<Transacao> CancelarAutorizacao(Transacao transacao)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<Transacao> CancelarAutorizacao(Transacao transacao)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         private static Transacao ParaTransacao(Transaction transaction)
         {

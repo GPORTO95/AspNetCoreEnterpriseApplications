@@ -40,7 +40,8 @@ namespace SE.Pedidos.API.Application.Commands
             if (!ValidarPedido(pedido)) return ValidationResult;
 
             // Processar pagamento
-            if (!await ProcessarPagamento(pedido, message)) return ValidationResult;
+            var pagamentoOk = await ProcessarPagamento(pedido, message);
+            if (!pagamentoOk) return ValidationResult;
 
             // Se pagamento tudo ok!
             pedido.AutorizarPedido();

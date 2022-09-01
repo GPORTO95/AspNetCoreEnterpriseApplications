@@ -5,7 +5,7 @@ using SE.WebApi.Core.Identidade;
 
 namespace SE.Pagamentos.API.Configuration
 {
-    public static  class ApiConfig
+    public static class ApiConfig
     {
         public static void AddApiConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
@@ -36,16 +36,13 @@ namespace SE.Pagamentos.API.Configuration
 
             app.UseHttpsRedirection();
 
-            app.UseRouting();
+            //app.UseRouting();
 
             app.UseCors("Total");
 
             app.UseAuthConfiguration();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.MapControllers();
         }
     }
 }

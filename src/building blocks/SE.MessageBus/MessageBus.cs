@@ -32,7 +32,7 @@ namespace SE.MessageBus
             await _bus.PubSub.PublishAsync(message);
         }
 
-        public async void Subscribe<T>(string subscriptionId, Action<T> onMessage) where T : class
+        public void Subscribe<T>(string subscriptionId, Action<T> onMessage) where T : class
         {
             TryConnect();
             _bus.PubSub.Subscribe(subscriptionId, onMessage);

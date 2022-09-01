@@ -40,7 +40,7 @@ namespace SE.Pedidos.API.Application.DTO
                 {
                     Nome = item.ProdutoNome,
                     Imagem = item.ProdutoImagem,
-                    Quantidade = item.Quantidaade,
+                    Quantidade = item.Quantidade,
                     ProdutoId = item.ProdutoId,
                     Valor = item.ValorUnitario,
                     PedidoId = item.PedidoId

@@ -52,7 +52,7 @@ namespace SE.Pedidos.Infra.Migrations
                     PedidoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ProdutoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ProdutoNome = table.Column<string>(type: "varchar(250)", nullable: false),
-                    Quantidaade = table.Column<int>(type: "int", nullable: false),
+                    Quantidade = table.Column<int>(type: "int", nullable: false),
                     ValorUnitario = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ProdutoImagem = table.Column<string>(type: "varchar(100)", nullable: true)
                 },

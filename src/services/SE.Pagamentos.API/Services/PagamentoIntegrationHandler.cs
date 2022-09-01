@@ -10,16 +10,19 @@ namespace SE.Pagamentos.API.Services
         private readonly IServiceProvider _serviceProvider;
 
         public PagamentoIntegrationHandler(
-            IMessageBus bus, 
+            IMessageBus bus,
             IServiceProvider serviceProvider)
         {
-            _bus = bus;
             _serviceProvider = serviceProvider;
+            _bus = bus;
         }
 
-        private async void SetResponder()
+        private void SetResponder()
         {
-            _bus.RespondAsync<PedidoIniciadoIntegrationEvent, ResponseMessage>(async request => await AutorizarPagamento(request));
+            _bus.RespondAsync<PedidoIniciadoIntegrationEvent, ResponseMessage>(async request => 
+                await AutorizarPagamento(request));
+
+            _bus.AdvancedBus.Connected += OnConnect;
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
@@ -28,25 +31,25 @@ namespace SE.Pagamentos.API.Services
             return Task.CompletedTask;
         }
 
+        private void OnConnect(object s, EventArgs e)
+        {
+            SetResponder();
+        }
+
         private async Task<ResponseMessage> AutorizarPagamento(PedidoIniciadoIntegrationEvent message)
         {
-            ResponseMessage response;
-
-            using(var scope = _serviceProvider.CreateScope())
+            using var scope = _serviceProvider.CreateScope();
+            var pagamentoService = scope.ServiceProvider.GetService<IPagamentoService>();
+            var pagamento = new Pagamento()
             {
-                var pagamentoService = scope.ServiceProvider.GetService<IPagamentoService>();
+                PedidoId = message.PedidoId,
+                TipoPagamento = (TipoPagamento)message.TipoPagamento,
+                Valor = message.Valor,
+                CartaoCredito = new CartaoCredito(
+                    message.NomeCartao, message.NumeroCartao, message.MesAnoVencimento, message.CVV)
+            };
 
-                var pagamento = new Pagamento()
-                {
-                    PedidoId = message.PedidoId,
-                    TipoPagamento = (TipoPagamento)message.TipoPagamento,
-                    Valor = message.Valor,
-                    CartaoCredito = new CartaoCredito(
-                        message.NomeCartao, message.NumeroCartao, message.MesAnoVencimento, message.CVV)
-                };
-
-                response = await pagamentoService.AutorizarPagamento(pagamento);
-            }
+            var response = await pagamentoService.AutorizarPagamento(pagamento);
 
             return response;
         }

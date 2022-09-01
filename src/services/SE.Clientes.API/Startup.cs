@@ -2,7 +2,6 @@
 using SE.Clientes.API.Configuration;
 using SE.WebApi.Core.Identidade;
 
-
 namespace SE.Clientes.API
 {
     public class Startup : IStartup

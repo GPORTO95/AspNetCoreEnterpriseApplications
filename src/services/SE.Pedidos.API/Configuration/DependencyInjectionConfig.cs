@@ -20,6 +20,8 @@ namespace SE.Pedidos.API.Configuration
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IAspNetUser, AspNetUser>();
 
+            services.AddScoped<IMediatorHandler, MediatorHandler>();
+
             // Commands
             services.AddScoped<IRequestHandler<AdicionarPedidoCommand, ValidationResult>, PedidoCommandHandler>();
 
@@ -27,7 +29,6 @@ namespace SE.Pedidos.API.Configuration
             services.AddScoped<INotificationHandler<PedidoRealizadoEvent>, PedidoEventHandler>();
 
             // Application
-            services.AddScoped<IMediatorHandler, MediatorHandler>();
             services.AddScoped<IVoucherQueries, VoucherQueries>();
             services.AddScoped<IPedidoQueries, PedidoQueries>();
 
