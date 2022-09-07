@@ -15,6 +15,17 @@ namespace SE.Catalogo.API.Models
         public decimal Valor { get; set; }
 
         public DateTime DataCadastro { get; set; }
+
+        public void RetirarEstoque(int quantidade)
+        {
+            if(QuantidadeEstoque >= quantidade)
+                QuantidadeEstoque -= quantidade;
+        }
+
+        public bool EstaDisponivel(int quantidade)
+        {
+            return Ativo && QuantidadeEstoque >= quantidade;
+        }
         
     }
 }
