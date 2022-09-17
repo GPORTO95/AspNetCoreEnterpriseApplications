@@ -40,11 +40,6 @@ namespace SE.Pagamentos.API.Services
             return Task.CompletedTask;
         }
 
-        private void OnConnect(object s, EventArgs e)
-        {
-            SetResponder();
-        }
-
         private async Task<ResponseMessage> AutorizarPagamento(PedidoIniciadoIntegrationEvent message)
         {
             using var scope = _serviceProvider.CreateScope();
@@ -86,7 +81,7 @@ namespace SE.Pagamentos.API.Services
             if (!response.ValidationResult.IsValid)
                 throw new DomainException($"Falha ao capturar pagamento do pedido {message.PedidoId}");
 
-            await _bus.PublishAsync(new PedidoPagoIntegrationEvent(message.ClienteId, message.PedidoId));
+            await _bus.PublishAsync(new PedidoPagoIntegrationEvent(message.PedidoId, message.ClienteId));
         }
 
     }

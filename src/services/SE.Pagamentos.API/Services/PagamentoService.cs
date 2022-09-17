@@ -67,7 +67,7 @@ namespace SE.Pagamentos.API.Services
                 return new ResponseMessage(validationResult);
             }
 
-            transacao.PagamentoId = transacao.PagamentoId;
+            transacao.PagamentoId = transacaoAutorizada.PagamentoId;
             _pagamentoRepository.AdicionarTransacao(transacao);
 
             if(!await _pagamentoRepository.UnitOfWork.Commit())

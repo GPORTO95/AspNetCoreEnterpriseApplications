@@ -6,7 +6,7 @@ namespace SE.Catalogo.API.Configuration
 {
     public static class DependencyInjectionConfig
     {
-        public static void AddDIConfiguration(this IServiceCollection services, IConfiguration configuration)
+        public static void RegisterServices(this IServiceCollection services)
         {
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
             services.AddScoped<CatalogoContext>();

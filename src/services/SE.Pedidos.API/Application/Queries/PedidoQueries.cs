@@ -29,7 +29,7 @@ namespace SE.Pedidos.API.Application.Queries
                                 FROM PEDIDOS P 
                                 INNER JOIN PEDIDOITEMS PIT ON P.ID = PIT.PEDIDOID 
                                 WHERE P.CLIENTEID = @clienteId 
-                                AND P.DATACADASTRO between DATEADD(minute, -3,  GETDATE()) and DATEADD(minute, 0,  GETDATE())
+                                AND P.DATACADASTRO between DATEADD(DAY, -2,  GETDATE()) and DATEADD(minute, 0,  GETDATE())
                                 AND P.PEDIDOSTATUS = 1 
                                 ORDER BY P.DATACADASTRO DESC";
 
@@ -48,7 +48,8 @@ namespace SE.Pedidos.API.Application.Queries
 
         public async Task<PedidoDTO> ObterPedidosAutorizados()
         {
-            const string sql = @"SELECT TOP 1
+            // Correção para pegar todos os itens do pedido e ordernar pelo pedido mais antigo
+            const string sql = @"SELECT
                                 P.ID as 'PedidoId', P.ID, P.CLIENTEID,
                                 PI.ID as 'PedidoItemId', PI.ID, PI.PRODUTOID, PI.QUANTIDADE
                                 FROM PEDIDOS P
@@ -56,16 +57,21 @@ namespace SE.Pedidos.API.Application.Queries
                                 WHERE P.PEDIDOSTATUS = 1
                                 ORDER BY P.DATACADASTRO";
 
+            var lookup = new Dictionary<Guid, PedidoDTO>();
+
             var pedido = await _pedidoRepository.ObterConexao().QueryAsync<PedidoDTO, PedidoItemDTO, PedidoDTO>(sql,
                 (p, pi) =>
                 {
-                    p.PedidoItems = new List<PedidoItemDTO>();
-                    p.PedidoItems.Add(pi);
+                    if (!lookup.TryGetValue(p.Id, out var pedidoDTO))
+                        lookup.Add(p.Id, pedidoDTO = p);
 
-                    return p;
+                    pedidoDTO.PedidoItems ??= new List<PedidoItemDTO>();
+                    pedidoDTO.PedidoItems.Add(pi);
+
+                    return pedidoDTO;
                 }, splitOn: "PedidoId,PedidoItemId");
 
-            return pedido.FirstOrDefault();
+            return lookup.Values.OrderBy(p => p.Data).FirstOrDefault();
         }
 
         private PedidoDTO MapearPedido(dynamic result)

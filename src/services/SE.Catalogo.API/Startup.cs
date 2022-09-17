@@ -27,11 +27,13 @@ namespace SE.Catalogo.API
         {
             services.AddApiConfiguration(Configuration);
 
+            services.AddMessageBusConfiguration(Configuration);
+
             services.AddJwtConfiguration(Configuration);
 
             services.AddSwaggerConfiguration();
 
-            services.AddDIConfiguration(Configuration);
+            services.RegisterServices();
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment environment)
