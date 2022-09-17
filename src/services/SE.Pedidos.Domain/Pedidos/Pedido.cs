@@ -43,6 +43,12 @@ namespace SE.Pedidos.Domain.Pedidos
         public void AtribuirEndereco(Endereco endereco) =>
             Endereco = endereco;
 
+        public void FinalizarPedido() =>
+            PedidoStatus = PedidoStatus.Pago;
+
+        public void CancelarPedido() =>
+            PedidoStatus = PedidoStatus.Cancelado;
+
         public void AtribuirVoucher(Voucher voucher)
         {
             VoucherUtilizado = true;

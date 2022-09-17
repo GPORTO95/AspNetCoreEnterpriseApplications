@@ -43,17 +43,27 @@ namespace SE.Pagamentos.API.Facade
             return ParaTransacao(await transacao.AuthorizeCardTransaction());
         }
 
-        //public Task<Transacao> CapturarPagamento(Transacao transacao)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public async Task<Transacao> CapturarPagamento(Transacao transacao)
+        {
+            var nerdsPagSvc = new NerdsPagService(_pagamentoConfig.DefaultApiKey,
+                _pagamentoConfig.DefaultEncryptionKey);
 
-        //public Task<Transacao> CancelarAutorizacao(Transacao transacao)
-        //{
-        //    throw new NotImplementedException();
-        //}
+            var transaction = ParaTransaction(transacao, nerdsPagSvc);
 
-        private static Transacao ParaTransacao(Transaction transaction)
+            return ParaTransacao(await transaction.CaptureCardTransaction());
+        }
+
+        public async Task<Transacao> CancelarAutorizacao(Transacao transacao)
+        {
+            var nerdsPagSvc = new NerdsPagService(_pagamentoConfig.DefaultApiKey, 
+                _pagamentoConfig.DefaultEncryptionKey);
+
+            var transaction = ParaTransaction(transacao, nerdsPagSvc);
+
+            return ParaTransacao(await transaction.CancelAuthorization());
+        }
+
+        public static Transacao ParaTransacao(Transaction transaction)
         {
             return new Transacao
             {
@@ -66,6 +76,20 @@ namespace SE.Pagamentos.API.Facade
                 DataTransacao = transaction.TransactionDate,
                 NSU = transaction.Nsu,
                 TID = transaction.Tid
+            };
+        }
+
+        public static Transaction ParaTransaction(Transacao transacao, NerdsPagService nerdsPagService)
+        {
+            return new Transaction(nerdsPagService)
+            {
+                Status = (TransactionStatus)transacao.Status,
+                Amount = transacao.ValorTotal,
+                CardBrand = transacao.BandeiraCartao,
+                AuthorizationCode = transacao.CodigoAutorizacao,
+                Cost = transacao.CustoTransacao,
+                Nsu = transacao.NSU,
+                Tid = transacao.TID
             };
         }
     }
