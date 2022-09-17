@@ -41,6 +41,7 @@ namespace SE.Pagamentos.API.Services
                     "Houve um erro ao realizar o pagamento."));
 
                 //TODO: Comunicar com o gateway para realizar o estorno
+                await CancelarPagamento(pagamento.PedidoId);
 
                 return new ResponseMessage(validationResult);
             }
