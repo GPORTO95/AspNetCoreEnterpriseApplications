@@ -1,4 +1,5 @@
 ﻿using SE.WebApi.Core.Identidade;
+using SE.WebApi.Core.Usuario;
 
 namespace SE.Identidade.API.Configuration
 {
@@ -7,6 +8,8 @@ namespace SE.Identidade.API.Configuration
         public static IServiceCollection AddApiConfiguration(this IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddScoped<IAspNetUser, AspNetUser>();
 
             return services;
         }
@@ -24,6 +27,9 @@ namespace SE.Identidade.API.Configuration
             app.UseAuthConfiguration();
 
             app.MapControllers();
+
+            //localhost/jwks
+            app.UseJwksDiscovery();
 
             return app;
         }
