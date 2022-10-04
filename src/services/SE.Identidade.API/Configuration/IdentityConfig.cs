@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using SE.Identidade.API.Data;
 using SE.Identidade.API.Extensions;
-using SE.WebApi.Core.Identidade;
 
 namespace SE.Identidade.API.Configuration
 {
@@ -22,9 +21,6 @@ namespace SE.Identidade.API.Configuration
                 .AddErrorDescriber<IdentityMensagensPortugues>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-
-            // JWT
-            services.AddJwtConfiguration(configuration);
 
             return services;
         }
