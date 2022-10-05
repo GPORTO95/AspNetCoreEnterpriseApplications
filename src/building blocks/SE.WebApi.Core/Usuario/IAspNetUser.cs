@@ -9,6 +9,7 @@ namespace SE.WebApi.Core.Usuario
         Guid ObterUserId();
         string ObterUserEmail();
         string ObterUserToken();
+        string ObterUserRefreshToken();
         bool EstaAutenticado();
         bool PossuiRole(string role);
         IEnumerable<Claim> ObterClaims();

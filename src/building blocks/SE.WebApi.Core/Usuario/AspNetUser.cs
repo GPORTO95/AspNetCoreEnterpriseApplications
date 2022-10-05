@@ -45,6 +45,11 @@ namespace SE.WebApi.Core.Usuario
             return EstaAutenticado() ? _accessor.HttpContext.User.GetUserToken() : "";
         }
 
+        public string ObterUserRefreshToken()
+        {
+            return EstaAutenticado() ? _accessor.HttpContext.User.GetUserRefreshToken() : "";
+        }
+
         public bool PossuiRole(string role)
         {
             return _accessor.HttpContext.User.IsInRole(role);

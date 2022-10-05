@@ -36,7 +36,7 @@ namespace SE.WebApp.MVC.Controllers
             if (ResponsePossuiErros(resposta.ResponseResult)) return View(usuarioRegistro);
 
             // Realizar login na APP
-            await RealizarLogin(resposta);
+            await _autenticacaoService.RealizarLogin(resposta);
 
             return RedirectToAction("Index", "Catalogo");
         }
@@ -64,7 +64,7 @@ namespace SE.WebApp.MVC.Controllers
             if (ResponsePossuiErros(resposta.ResponseResult)) return View(usuarioLogin);
 
             // Realizar login na APP
-            await RealizarLogin(resposta);
+            await _autenticacaoService.RealizarLogin(resposta);
 
             if(string.IsNullOrEmpty(returnUrl)) return RedirectToAction("Index", "Catalogo");
 
@@ -75,37 +75,9 @@ namespace SE.WebApp.MVC.Controllers
         [Route("sair")]
         public async Task<IActionResult> Logout()
         {
-            // Limpar o cookie da APP
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            await _autenticacaoService.Logout();
 
             return RedirectToAction("Index", "Catalogo");
-        }
-
-        private async Task RealizarLogin(UsuarioRespostaLogin resposta)
-        {
-            var token = ObterTokenFormatado(resposta.AccessToken);
-
-            var claims = new List<Claim>();
-            claims.Add(new Claim("JWT", resposta.AccessToken));
-            claims.AddRange(token.Claims);
-
-            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-            var authProperties = new AuthenticationProperties
-            {
-                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(60),
-                IsPersistent = true
-            };
-
-            await HttpContext.SignInAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(claimsIdentity),
-                authProperties);
-        }
-
-        private static JwtSecurityToken ObterTokenFormatado(string jwtToken)
-        {
-            return new JwtSecurityTokenHandler().ReadJwtToken(jwtToken) as JwtSecurityToken;
         }
     }
 }
