@@ -9,6 +9,9 @@ namespace SE.Identidade.API.Configuration
     {
         public static IServiceCollection AddIdentityConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
+            var appSettingsSection = configuration.GetSection("AppTokenSettings");
+            services.Configure<AppTokenSettings>(appSettingsSection);
+
             services
                 .AddJwksManager()
                 .PersistKeysToDatabaseStore<ApplicationDbContext>();

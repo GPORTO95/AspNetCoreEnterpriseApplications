@@ -1,4 +1,5 @@
-﻿using SE.WebApi.Core.Identidade;
+﻿using SE.Identidade.API.Services;
+using SE.WebApi.Core.Identidade;
 using SE.WebApi.Core.Usuario;
 
 namespace SE.Identidade.API.Configuration
@@ -9,6 +10,7 @@ namespace SE.Identidade.API.Configuration
         {
             services.AddControllers();
 
+            services.AddScoped<AuthenticationService>();
             services.AddScoped<IAspNetUser, AspNetUser>();
 
             return services;

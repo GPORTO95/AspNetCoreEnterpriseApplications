@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using NetDevPack.Security.Jwt.Core.Model;
 using NetDevPack.Security.Jwt.Store.EntityFrameworkCore;
+using SE.Identidade.API.Models;
 
 namespace SE.Identidade.API.Data
 {
@@ -11,5 +12,6 @@ namespace SE.Identidade.API.Data
             : base(options) { }
 
         public DbSet<KeyMaterial> SecurityKeys { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
     }
 }
