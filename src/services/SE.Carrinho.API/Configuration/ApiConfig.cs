@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SE.Carrinho.API.Data;
+using SE.Carrinho.API.Services.gRPC;
 using SE.WebApi.Core.Identidade;
 
 namespace SE.Carrinho.API.Configuration
@@ -12,6 +13,8 @@ namespace SE.Carrinho.API.Configuration
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllers();
+
+            services.AddGrpc();
 
             services.AddCors(options =>
             {
@@ -39,6 +42,7 @@ namespace SE.Carrinho.API.Configuration
             app.UseAuthConfiguration();
 
             app.MapControllers();
+            app.MapGrpcService<CarrinhoGrpcService>().RequireCors("Total");
         }
     }
 }
