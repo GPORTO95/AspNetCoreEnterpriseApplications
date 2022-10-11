@@ -33,6 +33,8 @@ namespace SE.Bff.Compras
 
             services.RegisterServices();
 
+            services.ConfigureGrpcServices(Configuration);
+
             services.AddMessageBusConfiguration(Configuration);
         }
 
