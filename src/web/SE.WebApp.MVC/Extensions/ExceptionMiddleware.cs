@@ -1,4 +1,5 @@
-﻿using Polly.CircuitBreaker;
+﻿using Grpc.Core;
+using Polly.CircuitBreaker;
 using Refit;
 using SE.WebApp.MVC.Services;
 using System.Net;
@@ -38,6 +39,26 @@ namespace SE.WebApp.MVC.Extensions
             catch(BrokenCircuitException)
             {
                 HandleCircuitBreakerExceptionAsync(httpContext);
+            }
+            catch(RpcException ex)
+            {
+                //400 Bad Request    INTERNAL
+                //401 Unauthorized   UNAUTHENTICATED
+                //403 Forbidden      PERMISSION_DENIED
+                //404 Not Found      UNIMPLEMENTED
+
+                var statusCode = ex.StatusCode switch
+                {
+                    StatusCode.Internal => 400,
+                    StatusCode.Unauthenticated => 401,
+                    StatusCode.PermissionDenied => 403,
+                    StatusCode.Unimplemented => 404,
+                    _ => 500
+                };
+
+                var httpsStatusCode = (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), statusCode.ToString());
+
+                HandleHaquestExceptionAsync(httpContext, httpsStatusCode);
             }
         }
 
