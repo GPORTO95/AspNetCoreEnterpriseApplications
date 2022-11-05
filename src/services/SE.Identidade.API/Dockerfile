@@ -7,10 +7,14 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["src/services/SE.Identidade.API/SE.Identidade.API.csproj", "src/services/SE.Identidade.API/"]
-RUN dotnet restore "src/services/SE.Identidade.API/SE.Identidade.API.csproj"
+COPY ["./services/SE.Identidade.API/SE.Identidade.API.csproj", "services/SE.Identidade.API/"]
+COPY ["./building blocks/SE.Core/SE.Core.csproj", "building blocks/SE.Core/"]
+COPY ["./building blocks/SE.WebApi.Core/SE.WebApi.Core.csproj", "building blocks/SE.WebApi.Core/"]
+COPY ["./building blocks/SE.MessageBus/SE.MessageBus.csproj", "building blocks/SE.MessageBus/"]
+
+RUN dotnet restore "services/SE.Identidade.API/SE.Identidade.API.csproj"
 COPY . .
-WORKDIR "/src/src/services/SE.Identidade.API"
+WORKDIR "services/SE.Identidade.API"
 RUN dotnet build "SE.Identidade.API.csproj" -c Release -o /app/build
 
 FROM build AS publish

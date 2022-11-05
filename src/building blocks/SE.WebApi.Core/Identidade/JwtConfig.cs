@@ -16,7 +16,6 @@ namespace SE.WebApi.Core.Identidade
             services.Configure<AppSettings>(appSettingsSection);
 
             var appSettings = appSettingsSection.Get<AppSettings>();
-            //var key = Encoding.ASCII.GetBytes(appSettings.Secret);
 
             services.AddAuthentication(options =>
             {
@@ -24,18 +23,10 @@ namespace SE.WebApi.Core.Identidade
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(bearerOptions =>
             {
-                bearerOptions.RequireHttpsMetadata = true;
+                bearerOptions.RequireHttpsMetadata = false;
+                bearerOptions.BackchannelHttpHandler = new HttpClientHandler { ServerCertificateCustomValidationCallback = delegate { return true; } };
                 bearerOptions.SaveToken = true;
                 bearerOptions.SetJwksOptions(new JwkOptions(appSettings.AutenticacaoJwksUrl));
-                //bearerOptions.TokenValidationParameters = new TokenValidationParameters
-                //{
-                //    ValidateIssuerSigningKey = true,
-                //    IssuerSigningKey = new SymmetricSecurityKey(key),
-                //    ValidateIssuer = true,
-                //    ValidateAudience = true,
-                //    ValidAudience = appSettings.ValidoEm,
-                //    ValidIssuer = appSettings.Emissor
-                //};
             });
         }
 

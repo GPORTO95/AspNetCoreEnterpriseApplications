@@ -7,10 +7,13 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["src/services/SE.Carrinho.API/SE.Carrinho.API.csproj", "src/services/SE.Carrinho.API/"]
-RUN dotnet restore "src/services/SE.Carrinho.API/SE.Carrinho.API.csproj"
+COPY ["./services/SE.Carrinho.API/SE.Carrinho.API.csproj", "services/SE.Carrinho.API/"]
+COPY ["./building blocks/SE.WebApi.Core/SE.WebApi.Core.csproj", "building blocks/SE.WebApi.Core/"]
+COPY ["./building blocks/SE.MessageBus/SE.MessageBus.csproj", "building blocks/SE.MessageBus/"]
+
+RUN dotnet restore "services/SE.Carrinho.API/SE.Carrinho.API.csproj"
 COPY . .
-WORKDIR "/src/src/services/SE.Carrinho.API"
+WORKDIR "services/SE.Carrinho.API"
 RUN dotnet build "SE.Carrinho.API.csproj" -c Release -o /app/build
 
 FROM build AS publish

@@ -40,6 +40,12 @@ namespace SE.Pagamentos.API.Services
             return Task.CompletedTask;
         }
 
+        private void OnConnect(object s, EventArgs e)
+        {
+            SetResponder();
+            SetSubscribers();
+        }
+
         private async Task<ResponseMessage> AutorizarPagamento(PedidoIniciadoIntegrationEvent message)
         {
             using var scope = _serviceProvider.CreateScope();

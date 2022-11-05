@@ -6,7 +6,6 @@ using SE.WebApi.Core.Identidade;
 
 namespace SE.Catalogo.API.Controllers
 {
-    [Authorize]
     public class CatalogoController : MainController
     {
         private readonly IProdutoRepository _produtoRepository;
@@ -16,14 +15,13 @@ namespace SE.Catalogo.API.Controllers
             _produtoRepository = produtoRepository;
         }
 
-        [AllowAnonymous]
         [HttpGet("catalogo/produtos")]
         public async Task<PagedResult<Produto>> Index([FromQuery] int ps = 8, [FromQuery] int page = 1, [FromQuery] string q = null)
         {
             return await _produtoRepository.ObterTodos(ps, page, q);
         }
 
-        [ClaimsAuthorize("Catalogo", "Ler")]
+        
         [HttpGet("catalogo/produtos/{id}")]
         public async Task<Produto> ProdutoDetalhe(Guid id)
         {

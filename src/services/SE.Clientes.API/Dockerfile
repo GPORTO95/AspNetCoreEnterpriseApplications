@@ -7,16 +7,20 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["src/services/SE.Cliente.API/SE.Cliente.API.csproj", "src/services/SE.Cliente.API/"]
-RUN dotnet restore "src/services/SE.Cliente.API/SE.Cliente.API.csproj"
+COPY ["./services/SE.Clientes.API/SE.Clientes.API.csproj", "services/SE.Clientes.API/"]
+COPY ["./building blocks/SE.Core/SE.Core.csproj", "building blocks/SE.Core/"]
+COPY ["./building blocks/SE.WebApi.Core/SE.WebApi.Core.csproj", "building blocks/SE.WebApi.Core/"]
+COPY ["./building blocks/SE.MessageBus/SE.MessageBus.csproj", "building blocks/SE.MessageBus/"]
+
+RUN dotnet restore "services/SE.Clientes.API/SE.Clientes.API.csproj"
 COPY . .
-WORKDIR "/src/src/services/SE.Cliente.API"
-RUN dotnet build "SE.Cliente.API.csproj" -c Release -o /app/build
+WORKDIR "services/SE.Clientes.API"
+RUN dotnet build "SE.Clientes.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "SE.Cliente.API.csproj" -c Release -o /app/publish
+RUN dotnet publish "SE.Clientes.API.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "SE.Cliente.API.dll"]
+ENTRYPOINT ["dotnet", "SE.Clientes.API.dll"]

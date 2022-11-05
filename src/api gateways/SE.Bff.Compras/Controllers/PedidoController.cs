@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SE.Bff.Compras.Models;
 using SE.Bff.Compras.Services;
 using SE.WebApi.Core.Controllers;
@@ -6,6 +7,7 @@ using System.Globalization;
 
 namespace SE.Bff.Compras.Controllers
 {
+    [Authorize]
     public class PedidoController : MainController
     {
         private readonly ICatalogoService _catalogoService;

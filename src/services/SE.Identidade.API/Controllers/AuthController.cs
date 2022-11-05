@@ -1,13 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using SE.Core.Messages.Integration;
 using SE.Identidade.API.Models;
 using SE.Identidade.API.Services;
 using SE.MessageBus;
 using SE.WebApi.Core.Controllers;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 
 namespace SE.Identidade.API.Controllers
 {

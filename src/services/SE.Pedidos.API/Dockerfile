@@ -7,16 +7,20 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["src/services/SE.Pedido.API/SE.Pedido.API.csproj", "src/services/SE.Pedido.API/"]
-RUN dotnet restore "src/services/SE.Pedido.API/SE.Pedido.API.csproj"
+COPY ["./services/SE.Pedidos.API/SE.Pedidos.API.csproj", "services/SE.Pedidos.API/"]
+COPY ["./building blocks/SE.Core/SE.Core.csproj", "building blocks/SE.Core/"]
+COPY ["./building blocks/SE.WebApi.Core/SE.WebApi.Core.csproj", "building blocks/SE.WebApi.Core/"]
+COPY ["./building blocks/SE.MessageBus/SE.MessageBus.csproj", "building blocks/SE.MessageBus/"]
+
+RUN dotnet restore "services/SE.Pedidos.API/SE.Pedidos.API.csproj"
 COPY . .
-WORKDIR "/src/src/services/SE.Pedido.API"
-RUN dotnet build "SE.Pedido.API.csproj" -c Release -o /app/build
+WORKDIR "services/SE.Pedidos.API"
+RUN dotnet build "SE.Pedidos.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "SE.Pedido.API.csproj" -c Release -o /app/publish
+RUN dotnet publish "SE.Pedidos.API.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "SE.Pedido.API.dll"]
+ENTRYPOINT ["dotnet", "SE.Pedidos.API.dll"]

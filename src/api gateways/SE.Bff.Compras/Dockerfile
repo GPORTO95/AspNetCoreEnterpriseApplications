@@ -7,10 +7,14 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["src/api gateways/SE.Bff.Compras/SE.Bff.Compras.csproj", "src/api gateways/SE.Bff.Compras/"]
-RUN dotnet restore "src/api gateways/SE.Bff.Compras/SE.Bff.Compras.csproj"
+COPY ["./api gateways/SE.Bff.Compras/SE.Bff.Compras.csproj", "api gateways/SE.Bff.Compras/"]
+COPY ["./building blocks/SE.Core/SE.Core.csproj", "building blocks/SE.Core/"]
+COPY ["./building blocks/SE.WebApi.Core/SE.WebApi.Core.csproj", "building blocks/SE.WebApi.Core/"]
+COPY ["./building blocks/SE.MessageBus/SE.MessageBus.csproj", "building blocks/SE.MessageBus/"]
+
+RUN dotnet restore "api gateways/SE.Bff.Compras/SE.Bff.Compras.csproj"
 COPY . .
-WORKDIR "/src/src/api gateways/SE.Bff.Compras"
+WORKDIR "api gateways/SE.Bff.Compras"
 RUN dotnet build "SE.Bff.Compras.csproj" -c Release -o /app/build
 
 FROM build AS publish
